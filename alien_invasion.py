@@ -23,6 +23,7 @@ class AlienInvasion:
             self.ship.update()
             self.bullets.update()
             self._update_screen()
+            self._remove_invalid_bullet()
 
     def _check_events(self):
         for event in pygame.event.get():
@@ -63,8 +64,6 @@ class AlienInvasion:
             case pygame.K_q:
                 sys.exit()
                 
-
-
     def _update_screen(self):
         self.screen.fill(self.settings.bg_color)
 
@@ -77,6 +76,12 @@ class AlienInvasion:
     def _fire_bullet(self):
         new_bullet = Bullet(self)
         self.bullets.add(new_bullet)
+
+    def _remove_invalid_bullet(self):
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
+        print(len(self.bullets))
 
 if __name__ == '__main__':
     ai = AlienInvasion()
