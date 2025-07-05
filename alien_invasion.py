@@ -21,9 +21,8 @@ class AlienInvasion:
         while True:
             self._check_events()
             self.ship.update()
-            self.bullets.update()
+            self._update_bullets()
             self._update_screen()
-            self._remove_invalid_bullet()
 
     def _check_events(self):
         for event in pygame.event.get():
@@ -77,6 +76,10 @@ class AlienInvasion:
         if len(self.bullets) < self.settings.bullets_allow:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
+
+    def _update_bullets(self):
+        self.bullets.update()
+        self._remove_invalid_bullet()
 
     def _remove_invalid_bullet(self):
         for bullet in self.bullets.copy():
