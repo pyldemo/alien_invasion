@@ -74,14 +74,14 @@ class AlienInvasion:
         pygame.display.flip()
 
     def _fire_bullet(self):
-        new_bullet = Bullet(self)
-        self.bullets.add(new_bullet)
+        if len(self.bullets) < self.settings.bullets_allow:
+            new_bullet = Bullet(self)
+            self.bullets.add(new_bullet)
 
     def _remove_invalid_bullet(self):
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
-        print(len(self.bullets))
 
 if __name__ == '__main__':
     ai = AlienInvasion()
