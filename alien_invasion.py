@@ -98,10 +98,13 @@ class AlienInvasion:
         number_aliens_x = available_space_x // (2 * alien_width)
 
         for i in range(number_aliens_x):
-            alien = Alien(self)
-            alien.x = alien_width + 2 * alien_width * i
-            alien.rect.x = alien.x
-            self.aliens.add(alien)
+            self._create_alien(i)
+
+    def _create_alien(self, alien_index):
+        alien = Alien(self)
+        alien.x = alien.rect.width + 2 * alien.rect.width * alien_index
+        alien.rect.x = alien.x
+        self.aliens.add(alien)
 
 if __name__ == '__main__':
     ai = AlienInvasion()
