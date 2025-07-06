@@ -95,15 +95,23 @@ class AlienInvasion:
         alien = Alien(self)
         alien_width = alien.rect.width
         available_space_x = self.settings.screen_width - (2 * alien_width)
-        number_aliens_x = available_space_x // (2 * alien_width)
+        aliens_number_per_row = available_space_x // (2 * alien_width)
 
-        for i in range(number_aliens_x):
-            self._create_alien(i)
+        alien_height = alien.rect.height
+        ship_height = self.ship.rect.height
+        available_space_y = self.settings.screen_height - (3 * alien_height) - ship_height
+        aliens_rows = available_space_y // (2 * alien_height)
 
-    def _create_alien(self, alien_index):
+        for row in range(aliens_rows):
+            for alien_number in range(aliens_number_per_row):
+                self._create_alien(alien_number, row)
+
+    def _create_alien(self, alien_number, row_number):
         alien = Alien(self)
-        alien.x = alien.rect.width + 2 * alien.rect.width * alien_index
+        alien.x = alien.rect.width + 2 * alien.rect.width * alien_number
         alien.rect.x = alien.x
+        alien.y = alien.rect.height + 2 * alien.rect.height * row_number
+        alien.rect.y = alien.y
         self.aliens.add(alien)
 
 if __name__ == '__main__':
