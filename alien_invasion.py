@@ -26,6 +26,7 @@ class AlienInvasion:
             self._check_events()
             self.ship.update()
             self._update_bullets()
+            self._update_aliens()
             self._update_screen()
 
     def _check_events(self):
@@ -66,7 +67,19 @@ class AlienInvasion:
                 self.ship.moving_down = False
             case pygame.K_q:
                 sys.exit()
+
+    def _update_bullets(self):
+        self.bullets.update()
+        self._remove_invalid_bullet()
                 
+    def _remove_invalid_bullet(self):
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
+
+    def _update_aliens(self):
+        self.aliens.update()
+
     def _update_screen(self):
         self.screen.fill(self.settings.bg_color)
 
@@ -81,15 +94,6 @@ class AlienInvasion:
         if len(self.bullets) < self.settings.bullets_allow:
             new_bullet = Bullet(self)
             self.bullets.add(new_bullet)
-
-    def _update_bullets(self):
-        self.bullets.update()
-        self._remove_invalid_bullet()
-
-    def _remove_invalid_bullet(self):
-        for bullet in self.bullets.copy():
-            if bullet.rect.bottom <= 0:
-                self.bullets.remove(bullet)
 
     def _create_fleet(self):
         alien = Alien(self)
@@ -113,6 +117,7 @@ class AlienInvasion:
         alien.y = alien.rect.height + 2 * alien.rect.height * row_number
         alien.rect.y = alien.y
         self.aliens.add(alien)
+
 
 if __name__ == '__main__':
     ai = AlienInvasion()
