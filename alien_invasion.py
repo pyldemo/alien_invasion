@@ -46,6 +46,13 @@ class AlienInvasion:
                     self._check_keydown_events(event)
                 case pygame.KEYUP:
                     self._check_keyup_events(event)
+                case pygame.MOUSEBUTTONDOWN:
+                    mouse_pos = pygame.mouse.get_pos()
+                    self._check_button(mouse_pos)
+    
+    def _check_button(self, mouse_pos):
+        if self.button.rect.collidepoint(mouse_pos):
+            self.stats.game_active = True
 
     def _check_keydown_events(self, event):
         match event.key:
