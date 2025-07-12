@@ -156,7 +156,6 @@ class AlienInvasion:
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
         self.aliens.draw(self.screen)
-        self.button.draw_button()
         
         if not self.stats.game_active:
             self.button.draw_button()
