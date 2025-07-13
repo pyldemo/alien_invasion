@@ -15,7 +15,8 @@ class Settings:
         self.fleet_drop_speed = 1
         
         self.speed_scale = 1.1
-        
+        self.score_scale = 1.5
+
         self.initialize_dynamic_settings()
 
     def initialize_dynamic_settings(self):
@@ -31,3 +32,5 @@ class Settings:
         self.ship_speed *= self.speed_scale
         self.bullet_speed *= self.speed_scale
         self.alien_speed *= self.speed_scale
+
+        self.alien_score = int(self.alien_score * self.score_scale)
