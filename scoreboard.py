@@ -16,7 +16,7 @@ class Scoreboard:
         
     def prep_score(self):
         rounded_score = round(self.stats.score, -1)
-        score_str = "{:,}".format(rounded_score)
+        score_str = "Score: {:,}".format(rounded_score)
         self.score_image = self.font.render(score_str, True, self.text_color, self.settings.bg_color)
         
         self.score_rect = self.score_image.get_rect()
@@ -35,7 +35,7 @@ class Scoreboard:
             
     def prep_max_score(self):
         rounded_max_score = round(self.stats.max_score, -1)
-        max_score_str = "{:,}".format(rounded_max_score)
+        max_score_str = "High Score: {:,}".format(rounded_max_score)
         self.max_score_image = self.font.render(max_score_str, True, self.text_color, self.settings.bg_color)
 
         self.max_score_rect = self.max_score_image.get_rect()
@@ -43,9 +43,9 @@ class Scoreboard:
         self.max_score_rect.top = self.score_rect.top
         
     def prep_level(self):
-        level_str = str(self.stats.level)
+        level_str = "Level: {}".format(self.stats.level)
         self.level_image = self.font.render(level_str, True, self.text_color, self.settings.bg_color)
         
         self.level_rect = self.level_image.get_rect()
-        self.level_rect.right = self.screen_rect.right
+        self.level_rect.right = self.score_rect.right
         self.level_rect.top = self.score_rect.bottom + 10
